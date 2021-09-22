@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bonjour - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <h1>Bonjour {{ name | upper }}</h1>
+
+    {# dump() #}
+
+    <a href="{{ path('hello') }}">Matthieu</a>
+    <a href="{{ path('hello_you', { name: 'Fabien' }) }}">Fabien</a>
+
+    {% if users is defined %}
+
+        <ul>
+        {% for user in users %}
+            <li>
+                <a href="{{ path('hello_you', { name: user.firstname }) }}">
+                    {{ user.firstname ~ ' ' ~ user.name }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ event.name }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div>
+    <h1>{{ event.name }} ✅</h1>
+    <p>{{ event.description }}</p>
+    {% if event.poster starts with 'http' %}
+    <img width="300" src="{{ event.poster }}" alt="{{ event.name }}">
+    {% elseif event.poster %}
+    <img width="300" src="{{ asset('images/' ~ event.poster) }}" alt="{{ event.name }}">
+    {% endif %}
+</div>
+{% endblock %}

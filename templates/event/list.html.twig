@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evénements - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div>
+    <h1>Evénements ✅</h1>
+    <p>{{ incoming }} événements à venir</p>
+    <a href="?sort=price">Trier par prix</a>
+    <a href="?sort=date">Par date</a>
+
+    <div>
+    {% for event in events %}
+        <h2>{{ event.name }}</h2>
+        <p>{{ event.description }}</p>
+        {% if event.poster starts with 'http' %}
+        <img width="300" src="{{ event.poster }}" alt="{{ event.name }}">
+        {% elseif event.poster %}
+        <img width="300" src="{{ asset('images/' ~ event.poster) }}" alt="{{ event.name }}">
+        {% endif %}
+        <p>
+            Du {{ date(event.startAt).format('d/m/Y à h\\hi') }}
+            au {{ date(event.endAt).format('d/m/Y à h\\hi') }}
+        </p>
+        <a class="btn btn-primary" href="{{ path('event_show', { id: event.id }) }}">Voir</a>
+        {% if date(event.startAt) <= date() and date(event.endAt) >= date() %}
+            <span class="badge bg-warning text-dark">en cours</span>
+        {% elseif date(event.endAt) < date() %}
+            <span class="badge bg-danger">passé</span>
+        {% else %}
+            <span class="badge bg-success">futur</span>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    {% if page > 1 %}
+        <a href="{{ path('event_list', { page: page - 1 }) }}" class="btn btn-primary">Précédent</a>
+    {% endif %}
+    <span>{{ page }}</span>
+    <a href="{{ path('event_list', { page: page + 1 }) }}" class="btn btn-primary">Suivant</a>
+</div>
+{% endblock %}

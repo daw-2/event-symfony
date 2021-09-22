@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un évènement - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>Créer un événement</h1>
+
+    {{ form_start(form) }}
+        {# form_row(form.name, {attr: {class: 'bg-primary'}}) #}
+
+        {# form_errors(form.description) #}
+        {# form_widget(form.description) #}
+        {# form_label(form.description) #}
+
+        {{ form_widget(form) }}
+
+        <button class="btn btn-primary" formnovalidate>Ajouter</button>
+    {{ form_end(form) }}
+{% endblock %}
