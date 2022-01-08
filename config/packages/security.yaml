@@ -38,7 +38,7 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/evenements/nouveau, roles: ROLE_ADMIN }
-        - { path: ^/, roles: ROLE_USER }
+        # - { path: ^/, roles: ROLE_USER }
 
     role_hierarchy:
         ROLE_MODERATOR: [ROLE_USER] 

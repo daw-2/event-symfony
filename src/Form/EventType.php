@@ -34,7 +34,7 @@ class EventType extends AbstractType
                 'attr' => ['class' => 'datepicker'],
                 'format' => 'dd MMMM yyyy HH:mm',
             ])
-            ->add('posterUrl')
+            // ->add('posterUrl')
             ->add('posterFile', FileType::class)
             ->add('place', null, [
                 'choice_label' => 'country',

@@ -84,9 +84,9 @@ class EventService
      */
     protected function uploadPoster($event)
     {
-        if (! empty($event->getPosterUrl())) {
-            return $event->setPoster($event->getPosterUrl());
-        }
+        // if (! empty($event->getPosterUrl())) {
+            // return $event->setPoster($event->getPosterUrl());
+        // }
 
         if (!$file = $event->getPosterFile()) {
             return;
