@@ -4,32 +4,40 @@
 
 {% block body %}
 <div>
-    <h1>Evénements ✅</h1>
-    <p>{{ incoming }} événements à venir</p>
-    <a href="?sort=price">Trier par prix</a>
-    <a href="?sort=date">Par date</a>
+    <div class="text-center">
+        <h1>Evénements ✅</h1>
+        <p>{{ incoming }} événements à venir</p>
+    </div>
+    <!-- <a href="?sort=price">Trier par prix</a>
+    <a href="?sort=date">Par date</a> -->
 
-    <div>
+    <div class="row">
     {% for event in events %}
-        <h2>{{ event.name }}</h2>
-        <p>{{ event.description }}</p>
-        {% if event.poster starts with 'http' %}
-        <img width="300" src="{{ event.poster }}" alt="{{ event.name }}">
-        {% elseif event.poster %}
-        <img width="300" src="{{ asset('images/' ~ event.poster) }}" alt="{{ event.name }}">
-        {% endif %}
-        <p>
-            Du {{ date(event.startAt).format('d/m/Y à h\\hi') }}
-            au {{ date(event.endAt).format('d/m/Y à h\\hi') }}
-        </p>
-        <a class="btn btn-primary" href="{{ path('event_show', { id: event.id }) }}">Voir</a>
-        {% if date(event.startAt) <= date() and date(event.endAt) >= date() %}
-            <span class="badge bg-warning text-dark">en cours</span>
-        {% elseif date(event.endAt) < date() %}
-            <span class="badge bg-danger">passé</span>
-        {% else %}
-            <span class="badge bg-success">futur</span>
-        {% endif %}
+        <div class="col-lg-3">
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <h2>{{ event.name }}</h2>
+                    <p>{{ event.description }}</p>
+                    {% if event.poster starts with 'http' %}
+                    <img width="300" src="{{ event.poster }}" alt="{{ event.name }}">
+                    {% elseif event.poster %}
+                    <img width="300" src="{{ asset('images/' ~ event.poster) }}" alt="{{ event.name }}">
+                    {% endif %}
+                    <p>
+                        Du {{ date(event.startAt).format('d/m/Y à h\\hi') }}
+                        au {{ date(event.endAt).format('d/m/Y à h\\hi') }}
+                    </p>
+                    <a class="btn btn-primary" href="{{ path('event_show', { id: event.id }) }}">Voir</a>
+                    {% if date(event.startAt) <= date() and date(event.endAt) >= date() %}
+                        <span class="badge bg-warning text-dark">en cours</span>
+                    {% elseif date(event.endAt) < date() %}
+                        <span class="badge bg-danger">passé</span>
+                    {% else %}
+                        <span class="badge bg-success">futur</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     {% endfor %}
     </div>
 

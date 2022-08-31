@@ -50,17 +50,19 @@ class AppFixtures extends Fixture
             $manager->persist($category);
         }
 
-        $event = new Event();
-        $event->setName('Concert');
-        $event->setDescription('Lorem ipsum');
-        $event->setPrice($faker->numberBetween(10, 100));
-        $event->setStartAt(
-            $d = \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-30 days'))
-        );
-        $event->setEndAt($d->modify('+2 days'));
-        $event->setPlace($place);
-        $event->addCategory($category);
-        $manager->persist($event);
+        for ($i = 1; $i <= 10; $i++) {
+            $event = new Event();
+            $event->setName('Concert '.$i);
+            $event->setDescription('Lorem ipsum');
+            $event->setPrice($faker->numberBetween(10, 100));
+            $event->setStartAt(
+                $d = \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-30 days'))
+            );
+            $event->setEndAt($d->modify('+2 days'));
+            $event->setPlace($place);
+            $event->addCategory($category);
+            $manager->persist($event);
+        }
 
         $manager->flush();
     }
